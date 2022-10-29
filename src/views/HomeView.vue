@@ -4,10 +4,16 @@
       <div class="card card-shadow">
         <div class="card-body">
           <div v-if="showLogin">
-            <Login @notShowLogin="showLogin = !showLogin"></Login>
+            <Login></Login>
+            <span class="text-link" @click="showLogin = !showLogin">
+              Have you account?
+            </span>
           </div>
           <div v-else>
-            <SignUp @notShowLogin="showLogin = !showLogin"></SignUp>
+            <SignUp></SignUp>
+            <span class="text-link" @click="showLogin = !showLogin">
+              Are you create account?
+            </span>
           </div>
         </div>
       </div>

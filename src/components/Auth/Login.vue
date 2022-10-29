@@ -8,9 +8,6 @@
       <input type="password" class="form-control" placeholder="Password" />
     </div>
     <div class="mt-3">
-      <span class="text-link" @click="$emit('notShowLogin')">
-        Have you account?
-      </span>
       <button class="btn btn-green float-end">Login</button>
     </div>
   </form>
