@@ -27,7 +27,15 @@
     </div>
     <div v-if="error" class="text-danger mt-2">{{ error }}</div>
     <div class="mt-3">
-      <button class="btn btn-green float-end">Sign Up</button>
+      <button class="btn btn-green float-end">
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+          v-show="loading"
+        ></span>
+        <span v-show="!loading">Sign Up</span>
+      </button>
     </div>
   </form>
 </template>
@@ -35,26 +43,33 @@
 <script>
 import { ref } from "@vue/reactivity";
 import useSignUp from "@/composables/useSignUp";
+import { useRouter } from "vue-router";
 export default {
   setup() {
     let displayName = ref("");
     let email = ref("");
     let password = ref("");
+    let router = useRouter();
+    let loading = ref(false);
 
     let { error, createAccount } = useSignUp();
 
     let signUp = async () => {
+      loading.value = true;
       let res = await createAccount(
         email.value,
         password.value,
         displayName.value
       );
       if (res) {
-        console.log(res);
+        router.push({ name: "chatRoom" });
       }
     };
+    if (error) {
+      loading.value = false;
+    }
 
-    return { displayName, email, password, signUp, error };
+    return { displayName, email, password, signUp, error, loading };
   },
 };
 </script>
